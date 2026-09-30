@@ -26,7 +26,7 @@ function tokensIguales(a: string, b: string): boolean {
   return timingSafeEqual(ha, hb);
 }
 
-@WebSocketGateway()
+@WebSocketGateway({ path: '/api/socket.io' })
 export class AirCareGateway
   implements OnGatewayInit, OnGatewayConnection, OnModuleDestroy
 {

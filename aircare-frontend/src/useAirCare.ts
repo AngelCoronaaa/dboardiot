@@ -43,6 +43,7 @@ export function useAirCare() {
 
   useEffect(() => {
     const socket = io(BACKEND_URL, {
+      path: '/api/socket.io',
       auth: { token: TOKEN },
       transports: ['websocket', 'polling'],
     });
