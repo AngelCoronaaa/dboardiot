@@ -31,7 +31,7 @@ export function Encabezado({ conexion, broker, placa, tema, cambiarTema }: Props
 
   return (
     <header className="encabezado">
-      <div>
+      <div className="marca">
         <h1>AirCare</h1>
         <p className="secundario">Equipo 5 · Monitoreo de calidad del aire</p>
       </div>
@@ -43,8 +43,8 @@ export function Encabezado({ conexion, broker, placa, tema, cambiarTema }: Props
           tono={TONO_CONEXION[conexion]}
           nota={conexion === 'conectado' && broker === false ? 'broker MQTT sin conexión' : undefined}
         />
-        <SelectorTema tema={tema} cambiar={cambiarTema} />
       </div>
+      <SelectorTema tema={tema} cambiar={cambiarTema} />
     </header>
   );
 }

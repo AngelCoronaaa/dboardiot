@@ -124,9 +124,15 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--fondo-b);
   -webkit-font-smoothing: antialiased;
 }
@@ -192,18 +198,27 @@ dd {
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 36px 24px 56px;
+  /* Respeta notch y barra de inicio cuando corre como app instalada. */
+  padding:
+    max(36px, calc(env(safe-area-inset-top) + 16px))
+    max(24px, calc(env(safe-area-inset-right) + 16px))
+    max(56px, calc(env(safe-area-inset-bottom) + 24px))
+    max(24px, calc(env(safe-area-inset-left) + 16px));
 }
 
 /* Encabezado */
 .encabezado {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: 'marca indicadores tema';
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 16px 10px;
   margin-bottom: 28px;
 }
+
+.marca { grid-area: marca; min-width: 0; }
+.indicadores { grid-area: indicadores; }
+.selector-tema { grid-area: tema; justify-self: end; }
 
 .encabezado h1 {
   font-size: 1.75rem;
@@ -307,13 +322,6 @@ dd {
 
 .rejilla > div > .tarjeta {
   height: 100%;
-}
-
-@media (max-width: 900px) {
-  .rejilla {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'calidad' 'clima' 'medidas' 'controles' 'alerta' 'historial';
-  }
 }
 
 /* Tarjetas */
@@ -422,12 +430,6 @@ dd {
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 640px) {
-  .medidas {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 .valor {
@@ -558,13 +560,112 @@ dd {
   opacity: 0.4;
 }
 
-@media (max-width: 480px) {
+/* ───────────── Responsivo ───────────── */
+/* iPad y celulares en horizontal: dos columnas */
+@media (max-width: 1099px) {
+  .encabezado {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'marca tema'
+      'indicadores indicadores';
+  }
+
+  .rejilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'calidad clima'
+      'medidas medidas'
+      'controles alerta'
+      'historial historial';
+  }
+}
+
+/* Celulares: una columna, todo más compacto */
+@media (max-width: 699px) {
   .pagina {
-    padding: 24px 16px 40px;
+    padding:
+      max(20px, calc(env(safe-area-inset-top) + 12px))
+      max(16px, calc(env(safe-area-inset-right) + 12px))
+      max(32px, calc(env(safe-area-inset-bottom) + 20px))
+      max(16px, calc(env(safe-area-inset-left) + 12px));
+  }
+
+  .encabezado {
+    gap: 14px 10px;
+    margin-bottom: 20px;
+  }
+
+  .encabezado h1 {
+    font-size: 1.5rem;
+  }
+
+  .encabezado h1 + p {
+    font-size: 0.8rem;
+  }
+
+  .indicadores {
+    gap: 6px;
+  }
+
+  .indicador {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 0.8rem;
+  }
+
+  .rejilla {
+    gap: 14px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'calidad' 'clima' 'medidas' 'controles' 'alerta' 'historial';
   }
 
   .tarjeta {
-    padding: 20px;
+    padding: 18px 20px;
+    border-radius: 22px;
+  }
+
+  .medidas {
+    gap: 14px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Cada medida en una fila: título y nivel a la izquierda, valor a la derecha. */
+  .medida {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'titulo valor'
+      'nivel valor';
+    align-items: center;
+    gap: 10px 16px;
+  }
+
+  .medida .titulo-tarjeta { grid-area: titulo; }
+  .medida .nivel { grid-area: nivel; justify-self: start; }
+
+  .medida .valor {
+    grid-area: valor;
+    font-size: 2.1rem;
+  }
+
+  .clima-detalles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Pantallas táctiles: blancos más grandes para el dedo */
+@media (pointer: coarse) {
+  .selector-tema {
+    height: 40px;
+  }
+
+  .selector-tema button {
+    width: 38px;
+    height: 32px;
+  }
+
+  .boton {
+    height: 40px;
   }
 }
 
