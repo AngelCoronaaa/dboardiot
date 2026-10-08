@@ -34,7 +34,7 @@ export function Historial({ puntos }: { puntos: PuntoHistorial[] }) {
               </figcaption>
               <ResponsiveContainer width="100%" height={140}>
                 <LineChart data={puntos} margin={{ top: 8, right: 8, bottom: 0, left: -16 }}>
-                  <CartesianGrid stroke="var(--borde)" vertical={false} />
+                  <CartesianGrid stroke="var(--linea)" vertical={false} />
                   <XAxis
                     dataKey="t"
                     tickFormatter={hora}
@@ -54,9 +54,12 @@ export function Historial({ puntos }: { puntos: PuntoHistorial[] }) {
                     labelFormatter={(t) => hora(Number(t))}
                     formatter={(v) => [`${v}${s.unidad ? ` ${s.unidad}` : ''}`, s.titulo]}
                     contentStyle={{
-                      background: 'var(--tarjeta)',
-                      border: '1px solid var(--borde)',
-                      borderRadius: 8,
+                      background: 'var(--vidrio-fuerte)',
+                      backdropFilter: 'blur(20px) saturate(170%)',
+                      WebkitBackdropFilter: 'blur(20px) saturate(170%)',
+                      border: '1px solid var(--vidrio-borde)',
+                      borderRadius: 14,
+                      boxShadow: '0 8px 24px var(--sombra)',
                       color: 'var(--texto)',
                     }}
                     labelStyle={{ color: 'var(--texto-2)' }}
@@ -65,10 +68,10 @@ export function Historial({ puntos }: { puntos: PuntoHistorial[] }) {
                   <Line
                     type="monotone"
                     dataKey={s.campo}
-                    stroke="var(--acento)"
-                    strokeWidth={2}
+                    stroke="var(--texto)"
+                    strokeWidth={1.75}
                     dot={false}
-                    activeDot={{ r: 4 }}
+                    activeDot={{ r: 4, fill: 'var(--texto)', stroke: 'var(--fondo-b)', strokeWidth: 2 }}
                     connectNulls
                     isAnimationActive={false}
                   />

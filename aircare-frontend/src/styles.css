@@ -1,19 +1,123 @@
+/* ───────────── Tokens ─────────────
+   Claro por defecto; oscuro por preferencia del sistema o por elección (data-theme). */
 :root {
-  --fondo: #0b1120;
-  --tarjeta: #16213e;
-  --borde: #1b263b;
-  --texto: #e0e6f0;
-  --texto-2: #a9b4c8;
-  --acento: #5c7cfa;
-  --verde: #51cf66;
-  --ambar: #ffd43b;
-  --rojo: #ff6b6b;
-  --radio: 12px;
+  --fondo-a: #f5f5f7;
+  --fondo-b: #e6e6eb;
+
+  --texto: #1d1d1f;
+  --texto-2: rgba(29, 29, 31, 0.6);
+  --texto-3: rgba(29, 29, 31, 0.38);
+  --linea: rgba(0, 0, 0, 0.07);
+
+  --vidrio: rgba(255, 255, 255, 0.42);
+  --vidrio-fuerte: rgba(255, 255, 255, 0.72);
+  --vidrio-borde: rgba(255, 255, 255, 0.75);
+  --vidrio-brillo: rgba(255, 255, 255, 0.95);
+  --vidrio-reflejo: rgba(255, 255, 255, 0.5);
+  --sombra: rgba(20, 20, 30, 0.1);
+
+  --acento: #1d1d1f;
+  --sobre-acento: #ffffff;
+  --hueco: rgba(0, 0, 0, 0.08);
+
+  --verde: #1f9d55;
+  --ambar: #b7791f;
+  --rojo: #d64545;
+
+  /* Escena del cielo */
+  --sol: #ffc861;
+  --sol-halo: rgba(255, 186, 73, 0.45);
+  --luna: #c9c9d6;
+  --estrella: rgba(60, 60, 80, 0.55);
+  --nube: rgba(255, 255, 255, 0.95);
+  --gota: rgba(55, 65, 85, 0.45);
+  --copo: rgba(255, 255, 255, 0.95);
+  --bruma: rgba(255, 255, 255, 0.75);
+  --destello: rgba(255, 255, 255, 0.75);
+
+  --radio: 24px;
+
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--texto);
+  background: var(--fondo-b);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --fondo-a: #0d0d10;
+    --fondo-b: #17171b;
+
+    --texto: #f5f5f7;
+    --texto-2: rgba(245, 245, 247, 0.62);
+    --texto-3: rgba(245, 245, 247, 0.38);
+    --linea: rgba(255, 255, 255, 0.08);
+
+    --vidrio: rgba(255, 255, 255, 0.055);
+    --vidrio-fuerte: rgba(30, 30, 34, 0.72);
+    --vidrio-borde: rgba(255, 255, 255, 0.11);
+    --vidrio-brillo: rgba(255, 255, 255, 0.16);
+    --vidrio-reflejo: rgba(255, 255, 255, 0.07);
+    --sombra: rgba(0, 0, 0, 0.45);
+
+    --acento: #f5f5f7;
+    --sobre-acento: #111113;
+    --hueco: rgba(255, 255, 255, 0.12);
+
+    --verde: #5fd38d;
+    --ambar: #f2c14e;
+    --rojo: #ff7b7b;
+
+    --sol: #f5c46a;
+    --sol-halo: rgba(245, 180, 80, 0.22);
+    --luna: #e8e8f0;
+    --estrella: rgba(255, 255, 255, 0.8);
+    --nube: rgba(255, 255, 255, 0.09);
+    --gota: rgba(220, 225, 240, 0.35);
+    --copo: rgba(255, 255, 255, 0.8);
+    --bruma: rgba(255, 255, 255, 0.07);
+    --destello: rgba(255, 255, 255, 0.25);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --fondo-a: #0d0d10;
+  --fondo-b: #17171b;
+
+  --texto: #f5f5f7;
+  --texto-2: rgba(245, 245, 247, 0.62);
+  --texto-3: rgba(245, 245, 247, 0.38);
+  --linea: rgba(255, 255, 255, 0.08);
+
+  --vidrio: rgba(255, 255, 255, 0.055);
+  --vidrio-fuerte: rgba(30, 30, 34, 0.72);
+  --vidrio-borde: rgba(255, 255, 255, 0.11);
+  --vidrio-brillo: rgba(255, 255, 255, 0.16);
+  --vidrio-reflejo: rgba(255, 255, 255, 0.07);
+  --sombra: rgba(0, 0, 0, 0.45);
+
+  --acento: #f5f5f7;
+  --sobre-acento: #111113;
+  --hueco: rgba(255, 255, 255, 0.12);
+
+  --verde: #5fd38d;
+  --ambar: #f2c14e;
+  --rojo: #ff7b7b;
+
+  --sol: #f5c46a;
+  --sol-halo: rgba(245, 180, 80, 0.22);
+  --luna: #e8e8f0;
+  --estrella: rgba(255, 255, 255, 0.8);
+  --nube: rgba(255, 255, 255, 0.09);
+  --gota: rgba(220, 225, 240, 0.35);
+  --copo: rgba(255, 255, 255, 0.8);
+  --bruma: rgba(255, 255, 255, 0.07);
+  --destello: rgba(255, 255, 255, 0.25);
 
   color-scheme: dark;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: var(--texto);
-  background: var(--fondo);
 }
 
 * {
@@ -22,20 +126,17 @@
 
 body {
   margin: 0;
-  background: var(--fondo);
+  min-height: 100vh;
+  background: var(--fondo-b);
   -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
-p {
+p,
+dl,
+dd {
   margin: 0;
-}
-
-.pagina {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
 }
 
 .secundario {
@@ -54,10 +155,44 @@ p {
 .tono-bueno { --tono: var(--verde); }
 .tono-medio { --tono: var(--ambar); }
 .tono-malo { --tono: var(--rojo); }
-.tono-neutro { --tono: var(--texto-2); }
+.tono-neutro { --tono: var(--texto-3); }
 
 .texto-tono {
   color: var(--tono);
+}
+
+.punto {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tono);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--tono) 18%, transparent);
+}
+
+/* ───────────── Vidrio ───────────── */
+.tarjeta,
+.indicador,
+.selector-tema,
+.boton {
+  background:
+    linear-gradient(135deg, var(--vidrio-reflejo) 0%, transparent 45%),
+    var(--vidrio);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid var(--vidrio-borde);
+  box-shadow:
+    inset 0 1px 0 var(--vidrio-brillo),
+    0 12px 40px -16px var(--sombra);
+}
+
+/* ───────────── Página ───────────── */
+.pagina {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 24px 56px;
 }
 
 /* Encabezado */
@@ -71,31 +206,35 @@ p {
 }
 
 .encabezado h1 {
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 650;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
+}
+
+.encabezado h1 + p {
+  margin-top: 2px;
+  font-size: 0.9rem;
 }
 
 .indicadores {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
 }
 
 .indicador {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 1px solid var(--borde);
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
   border-radius: 999px;
-  background: var(--tarjeta);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .indicador strong {
-  color: var(--tono);
-  font-weight: 600;
+  font-weight: 560;
 }
 
 .indicador .nota {
@@ -103,29 +242,68 @@ p {
   font-size: 0.8rem;
 }
 
-.punto {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--tono);
+/* Selector de tema */
+.selector-tema {
+  display: inline-flex;
+  gap: 2px;
+  height: 36px;
+  padding: 3px;
+  border-radius: 999px;
+}
+
+.selector-tema button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-2);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.selector-tema button:hover {
+  color: var(--texto);
+}
+
+.selector-tema button.activo {
+  background: var(--acento);
+  color: var(--sobre-acento);
+}
+
+.selector-tema svg {
+  width: 16px;
+  height: 16px;
+}
+
+.selector-tema button:focus-visible,
+.boton:focus-visible,
+.switch:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
 }
 
 /* Rejilla principal */
 .rejilla {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-areas:
-    'calidad calidad calidad calidad calidad calidad calidad calidad alerta alerta alerta alerta'
+    'calidad calidad calidad calidad calidad calidad calidad clima clima clima clima clima'
     'medidas medidas medidas medidas medidas medidas medidas medidas medidas medidas medidas medidas'
-    'historial historial historial historial historial historial historial historial controles controles controles controles';
+    'historial historial historial historial historial historial historial historial controles controles controles controles'
+    'historial historial historial historial historial historial historial historial alerta alerta alerta alerta';
 }
 
 .area-calidad { grid-area: calidad; }
-.area-alerta { grid-area: alerta; }
+.area-clima { grid-area: clima; }
 .area-medidas { grid-area: medidas; }
 .area-historial { grid-area: historial; }
 .area-controles { grid-area: controles; }
+.area-alerta { grid-area: alerta; }
 
 .rejilla > div > .tarjeta {
   height: 100%;
@@ -134,46 +312,115 @@ p {
 @media (max-width: 900px) {
   .rejilla {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'calidad' 'medidas' 'controles' 'alerta' 'historial';
+    grid-template-areas: 'calidad' 'clima' 'medidas' 'controles' 'alerta' 'historial';
   }
 }
 
 /* Tarjetas */
 .tarjeta {
-  background: var(--tarjeta);
-  border: 1px solid var(--borde);
   border-radius: var(--radio);
-  padding: 20px 22px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 .titulo-tarjeta {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--texto-2);
+}
+
+.fila-titulo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 /* Calidad general */
 .calidad {
-  border-left: 4px solid var(--tono);
+  justify-content: space-between;
 }
 
 .calidad-texto {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   color: var(--tono);
   text-transform: uppercase;
+}
+
+.calidad-texto .punto {
+  width: 12px;
+  height: 12px;
+}
+
+/* Clima exterior */
+.clima-principal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icono-clima {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.clima-descripcion {
+  font-weight: 560;
+}
+
+.clima-detalles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linea);
+}
+
+.clima-detalles dt {
+  font-size: 0.75rem;
+  color: var(--texto-2);
+}
+
+.clima-detalles dd {
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+}
+
+.clima-vacio {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.boton {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 560;
+  cursor: pointer;
 }
 
 /* Medidas */
 .medidas {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -183,28 +430,39 @@ p {
   }
 }
 
-.medida {
-  border-top: 3px solid var(--tono);
-}
-
 .valor {
-  font-size: 2.4rem;
-  font-weight: 650;
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 .unidad {
   font-size: 1rem;
   font-weight: 500;
+  letter-spacing: 0;
   color: var(--texto-2);
   margin-left: 4px;
 }
 
 .nivel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 4px 12px 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--tono) 12%, transparent);
   color: var(--tono);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+.nivel .punto {
+  width: 6px;
+  height: 6px;
+  box-shadow: none;
 }
 
 /* Última alerta */
@@ -213,12 +471,12 @@ p {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 10px;
-  font-size: 1.3rem;
-  font-weight: 650;
+  font-size: 1.25rem;
+  font-weight: 620;
 }
 
 .flecha {
-  color: var(--texto-2);
+  color: var(--texto-3);
 }
 
 /* Historial */
@@ -245,13 +503,13 @@ p {
   gap: 16px;
   padding: 16px;
   border: 1px dashed transparent;
-  border-radius: 10px;
+  border-radius: 16px;
   transition: opacity 0.2s;
 }
 
 .actuadores.sin-efecto {
   opacity: 0.5;
-  border-color: var(--borde);
+  border-color: var(--linea);
 }
 
 .fila-switch {
@@ -264,35 +522,35 @@ p {
 .switch {
   position: relative;
   flex: none;
-  width: 46px;
-  height: 26px;
+  width: 50px;
+  height: 30px;
   padding: 0;
-  border: 1px solid var(--borde);
+  border: 0;
   border-radius: 999px;
-  background: var(--fondo);
+  background: var(--hueco);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.25s;
 }
 
 .switch .perilla {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--texto-2);
-  transition: transform 0.15s, background 0.15s;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1);
 }
 
 .switch.on {
   background: var(--acento);
-  border-color: var(--acento);
 }
 
 .switch.on .perilla {
   transform: translateX(20px);
-  background: #fff;
+  background: var(--sobre-acento);
 }
 
 .switch:disabled {
@@ -300,13 +558,201 @@ p {
   opacity: 0.4;
 }
 
-.switch:focus-visible {
-  outline: 2px solid var(--acento);
-  outline-offset: 2px;
-}
-
 @media (max-width: 480px) {
   .pagina {
-    padding: 20px 16px 32px;
+    padding: 24px 16px 40px;
+  }
+
+  .tarjeta {
+    padding: 20px;
+  }
+}
+
+/* ───────────── Cielo (fondo según el clima exterior) ───────────── */
+.cielo {
+  --tinte: transparent;
+  --fuerza: 0%;
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--tinte) var(--fuerza), var(--fondo-a)) 0%,
+    var(--fondo-b) 100%
+  );
+}
+
+.cielo-despejado.dia { --tinte: #ffc56b; --fuerza: 32%; }
+.cielo-despejado.noche { --tinte: #5d5f8f; --fuerza: 22%; }
+.cielo-parcial.dia { --tinte: #ffd08a; --fuerza: 20%; }
+.cielo-parcial.noche { --tinte: #5d5f8f; --fuerza: 14%; }
+.cielo-nublado { --tinte: #8e939c; --fuerza: 24%; }
+.cielo-niebla { --tinte: #b9b9bd; --fuerza: 30%; }
+.cielo-lluvia { --tinte: #6f7f92; --fuerza: 30%; }
+.cielo-tormenta { --tinte: #4c5063; --fuerza: 42%; }
+.cielo-nieve { --tinte: #8fa0b2; --fuerza: 30%; }
+.cielo-desconocido.noche { --tinte: #5d5f8f; --fuerza: 8%; }
+
+.cielo .capa {
+  position: absolute;
+  inset: 0;
+}
+
+/* Sol y luna */
+.astro {
+  position: absolute;
+  top: 9vh;
+  right: 12vw;
+  border-radius: 50%;
+}
+
+.sol {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, var(--sol) 0%, var(--sol) 45%, transparent 70%);
+  box-shadow: 0 0 140px 60px var(--sol-halo);
+  animation: latir 10s ease-in-out infinite;
+}
+
+.cielo-parcial .sol,
+.cielo-desconocido .sol {
+  opacity: 0.55;
+}
+
+.luna {
+  width: 90px;
+  height: 90px;
+  box-shadow:
+    inset -22px 10px 0 0 var(--luna),
+    0 0 60px 6px color-mix(in oklab, var(--luna) 20%, transparent);
+  transform: rotate(-20deg);
+}
+
+.cielo-desconocido .luna {
+  opacity: 0.4;
+}
+
+@keyframes latir {
+  50% { transform: scale(1.06); }
+}
+
+.estrella {
+  position: absolute;
+  width: var(--tamano);
+  height: var(--tamano);
+  border-radius: 50%;
+  background: var(--estrella);
+  animation: titilar 6s ease-in-out infinite;
+}
+
+@keyframes titilar {
+  50% { opacity: 0.25; }
+}
+
+/* Nubes: elipses difusas que se desplazan muy lento */
+.nube {
+  position: absolute;
+  width: calc(560px * var(--escala));
+  height: calc(220px * var(--escala));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--nube), transparent);
+  animation: derivar 80s ease-in-out infinite alternate;
+}
+
+.nube::after {
+  content: '';
+  position: absolute;
+  left: 22%;
+  top: -35%;
+  width: 55%;
+  height: 120%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--nube), transparent);
+}
+
+@keyframes derivar {
+  from { transform: translateX(-6vw); }
+  to { transform: translateX(8vw); }
+}
+
+/* Niebla */
+.banda {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  height: 22vh;
+  top: calc(18vh + var(--i) * 20vh);
+  background: radial-gradient(50% 50% at 50% 50%, var(--bruma), transparent);
+  animation: derivar calc(40s + var(--i) * 12s) ease-in-out infinite alternate;
+}
+
+.banda:nth-child(even) {
+  animation-direction: alternate-reverse;
+}
+
+/* Lluvia */
+.lluvia {
+  transform: rotate(10deg) scale(1.2);
+}
+
+.gota {
+  position: absolute;
+  top: -12vh;
+  width: 1.5px;
+  border-radius: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gota));
+  animation: caer linear infinite;
+}
+
+@keyframes caer {
+  to { transform: translateY(125vh); }
+}
+
+/* Nieve */
+.copo {
+  position: absolute;
+  top: -4vh;
+  width: var(--tamano);
+  height: var(--tamano);
+  border-radius: 50%;
+  background: var(--copo);
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.12));
+  animation: nevar linear infinite;
+}
+
+@keyframes nevar {
+  to { transform: translate3d(var(--deriva), 110vh, 0); }
+}
+
+/* Tormenta */
+.relampago {
+  position: absolute;
+  inset: 0;
+  background: var(--destello);
+  opacity: 0;
+  animation: destellar 9s linear infinite;
+}
+
+@keyframes destellar {
+  0%, 90%, 100% { opacity: 0; }
+  91% { opacity: 0.9; }
+  92% { opacity: 0.1; }
+  93.5% { opacity: 0.7; }
+  96% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cielo *,
+  .cielo *::after {
+    animation: none !important;
+  }
+
+  .gota,
+  .copo,
+  .relampago {
+    display: none;
   }
 }

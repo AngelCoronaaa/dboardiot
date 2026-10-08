@@ -32,7 +32,10 @@ export function Medidas({ datos }: { datos: Datos | null }) {
               {formatear(datos?.[m.campo], m.decimales)}
               {m.unidad && <span className="unidad">{m.unidad}</span>}
             </p>
-            <p className="nivel">{typeof nivel === 'string' ? nivel : 'Sin datos'}</p>
+            <p className="nivel">
+              <span className="punto" aria-hidden />
+              {typeof nivel === 'string' ? nivel : 'Sin datos'}
+            </p>
           </article>
         );
       })}
