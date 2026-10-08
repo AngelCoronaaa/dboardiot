@@ -33,7 +33,7 @@ export function Encabezado({ conexion, broker, placa, tema, cambiarTema }: Props
     <header className="encabezado">
       <div className="marca">
         <h1>AirCare</h1>
-        <p className="secundario">Equipo 5 · Monitoreo de calidad del aire</p>
+        <p className="secundario">Monitoreo de calidad del aire</p>
       </div>
       <div className="indicadores">
         <Indicador etiqueta="Placa" texto={textoPlaca} tono={tonoPlaca} />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export type PreferenciaTema = 'sistema' | 'claro' | 'oscuro';
 
@@ -15,21 +15,30 @@ function leer(): PreferenciaTema {
   return 'sistema';
 }
 
+function aplicar(tema: PreferenciaTema) {
+  const raiz = document.documentElement;
+  if (tema === 'sistema') delete raiz.dataset.theme;
+  else raiz.dataset.theme = tema === 'claro' ? 'light' : 'dark';
+
+  try {
+    if (tema === 'sistema') localStorage.removeItem(CLAVE);
+    else localStorage.setItem(CLAVE, tema);
+  } catch {
+    // Sin acceso a localStorage: la preferencia dura solo esta sesión.
+  }
+}
+
 export function useTema() {
   const [tema, setTema] = useState<PreferenciaTema>(leer);
 
-  useEffect(() => {
-    const raiz = document.documentElement;
-    if (tema === 'sistema') delete raiz.dataset.theme;
-    else raiz.dataset.theme = tema === 'claro' ? 'light' : 'dark';
+  useEffect(() => aplicar(tema), [tema]);
 
-    try {
-      if (tema === 'sistema') localStorage.removeItem(CLAVE);
-      else localStorage.setItem(CLAVE, tema);
-    } catch {
-      // Sin acceso a localStorage: la preferencia dura solo esta sesión.
-    }
-  }, [tema]);
+  // Se aplica al DOM de inmediato (no en el efecto) para que la transición
+  // de vista capture el tema nuevo en el mismo instante.
+  const cambiar = useCallback((nuevo: PreferenciaTema) => {
+    aplicar(nuevo);
+    setTema(nuevo);
+  }, []);
 
-  return [tema, setTema] as const;
+  return [tema, cambiar] as const;
 }
