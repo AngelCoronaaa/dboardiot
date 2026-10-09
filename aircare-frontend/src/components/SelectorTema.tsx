@@ -55,19 +55,15 @@ export function SelectorTema({ tema, cambiar }: Props) {
     const y = r.top + r.height / 2;
     const radio = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
+    // La animación vive en CSS (.cambiando-tema); aquí solo se le pasa el origen.
+    const raiz = document.documentElement;
+    raiz.style.setProperty('--vt-x', `${x}px`);
+    raiz.style.setProperty('--vt-y', `${y}px`);
+    raiz.style.setProperty('--vt-r', `${radio}px`);
+    raiz.classList.add('cambiando-tema');
+
     const transicion = document.startViewTransition(() => flushSync(() => cambiar(valor)));
-    transicion.ready
-      .then(() => {
-        document.documentElement.animate(
-          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radio}px at ${x}px ${y}px)`] },
-          {
-            duration: 650,
-            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-            pseudoElement: '::view-transition-new(root)',
-          },
-        );
-      })
-      .catch(() => {});
+    transicion.finished.finally(() => raiz.classList.remove('cambiando-tema'));
   };
 
   return (

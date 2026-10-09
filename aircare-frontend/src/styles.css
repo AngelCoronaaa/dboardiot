@@ -326,15 +326,22 @@ dd {
   from { transform: rotate(-90deg) scale(0.6); }
 }
 
-/* Cambio de tema: la animación de revelado se hace desde JS (SelectorTema). */
+/* Cambio de tema: el tema nuevo se revela en un círculo desde el botón pulsado.
+   SelectorTema fija --vt-x, --vt-y y --vt-r en <html> antes de la transición. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-new(root) {
+:root.cambiando-tema::view-transition-new(root) {
   z-index: 1;
+  animation: revelar-tema 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes revelar-tema {
+  from { clip-path: circle(0 at var(--vt-x) var(--vt-y)); }
+  to { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
 }
 
 .selector-tema button:focus-visible,
@@ -754,7 +761,24 @@ dd {
   height: 180px;
   background: radial-gradient(circle, var(--sol) 0%, var(--sol) 45%, transparent 70%);
   box-shadow: 0 0 140px 60px var(--sol-halo);
-  animation: latir 10s ease-in-out infinite;
+  animation: latir 7s ease-in-out infinite;
+}
+
+/* Rayos suaves que giran lentamente alrededor del sol */
+.sol::before {
+  content: '';
+  position: absolute;
+  inset: -120px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(var(--sol-halo) 0deg 5deg, transparent 5deg 24deg);
+  -webkit-mask: radial-gradient(circle, transparent 30%, #000 42%, transparent 70%);
+  mask: radial-gradient(circle, transparent 30%, #000 42%, transparent 70%);
+  opacity: 0.55;
+  animation: rotar 70s linear infinite;
+}
+
+@keyframes rotar {
+  to { transform: rotate(1turn); }
 }
 
 .cielo-parcial .sol,
@@ -776,7 +800,7 @@ dd {
 }
 
 @keyframes latir {
-  50% { transform: scale(1.06); }
+  50% { transform: scale(1.1); }
 }
 
 .estrella {
@@ -789,33 +813,72 @@ dd {
 }
 
 @keyframes titilar {
-  50% { opacity: 0.25; }
+  50% { opacity: 0.2; transform: scale(0.7); }
 }
 
-/* Nubes: elipses difusas que se desplazan muy lento */
-.nube {
+/* Estrella fugaz ocasional */
+.fugaz {
   position: absolute;
-  width: calc(560px * var(--escala));
-  height: calc(220px * var(--escala));
+  top: 8%;
+  left: 20%;
+  width: 140px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: linear-gradient(to right, transparent, var(--estrella));
+  opacity: 0;
+  transform: rotate(18deg);
+  animation: fugaz 13s ease-in infinite;
+}
+
+@keyframes fugaz {
+  0%, 88% { opacity: 0; transform: rotate(18deg) translateX(0); }
+  90% { opacity: 1; }
+  96%, 100% { opacity: 0; transform: rotate(18deg) translateX(420px); }
+}
+
+/* Nubes: masas difusas que cruzan la pantalla en bucle */
+.nube {
+  --ancho: calc(520px * var(--escala));
+
+  position: absolute;
+  left: 0;
+  width: var(--ancho);
+  height: calc(var(--ancho) * 0.38);
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--nube), transparent);
-  animation: derivar 80s ease-in-out infinite alternate;
+  animation: cruzar 70s linear infinite;
+  will-change: transform;
 }
 
+.nube::before,
 .nube::after {
   content: '';
   position: absolute;
-  left: 22%;
-  top: -35%;
-  width: 55%;
-  height: 120%;
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--nube), transparent);
 }
 
-@keyframes derivar {
-  from { transform: translateX(-6vw); }
-  to { transform: translateX(8vw); }
+.nube::before {
+  left: 14%;
+  top: -40%;
+  width: 46%;
+  height: 130%;
+}
+
+.nube::after {
+  left: 44%;
+  top: -60%;
+  width: 40%;
+  height: 140%;
+}
+
+.cielo-desconocido .nube {
+  opacity: 0.5;
+}
+
+@keyframes cruzar {
+  from { transform: translateX(calc(-1 * var(--ancho))); }
+  to { transform: translateX(100vw); }
 }
 
 /* Niebla */
@@ -826,7 +889,12 @@ dd {
   height: 22vh;
   top: calc(18vh + var(--i) * 20vh);
   background: radial-gradient(50% 50% at 50% 50%, var(--bruma), transparent);
-  animation: derivar calc(40s + var(--i) * 12s) ease-in-out infinite alternate;
+  animation: derivar calc(18s + var(--i) * 6s) ease-in-out infinite alternate;
+}
+
+@keyframes derivar {
+  from { transform: translateX(-12vw); }
+  to { transform: translateX(12vw); }
 }
 
 .banda:nth-child(even) {
